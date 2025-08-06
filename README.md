@@ -50,6 +50,3 @@ src/
 ├── App.tsx
 └── main.tsx
 
-
----
-
