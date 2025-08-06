@@ -37,12 +37,12 @@ const NoteForm = () => {
         placeholder="Type your note..."
         value={note}
         onChange={(e) => setNote(e.target.value)}
-        maxLength={50}
+        maxLength={100}
         className="text-sm"
       />
 
       <div className="flex justify-between text-xs text-gray-500">
-        <span>{note.length}/50</span>
+        <span>{note.length}/100</span>
       </div>
 
       <Button
