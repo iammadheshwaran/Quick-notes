@@ -1,19 +1,37 @@
-import NoteForm from "@/components/NoteForm"
-import NoteList from "@/components/NoteList"
+import NoteForm from "@/components/NoteForm";
+import NoteList from "@/components/NoteList";
 
 const Home = () => {
   return (
-    <div className="flex items-center justify-center px-4 py-8 bg-gray-50 max-w-screen-sm mx-auto w-full font-poppins">
-        <div className="w-full">
-            <h1 className="font-poppins text-3xl mb-8 font-bold text-center">Quick Notes</h1>
+    <div className="min-h-screen bg-gradient-to-b from-slate-100 to-purple-100 flex flex-col items-center font-poppins px-4 py-10">
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-extrabold text-gray-800 mb-2 flex items-center justify-center gap-2">
+          QuickNotes <span>📝</span>
+        </h1>
+        <p className="text-gray-600 text-lg">Fast, minimal note-taking — built for speed.</p>
+      </div>
 
-            <div className="p-6 bg-white rounded-lg shadow">
-                <NoteForm/>
-            </div>
-            <NoteList/>
+      {/* Unified Card Container */}
+      <div className="w-full max-w-2xl flex flex-col gap-8">
+        {/* Note Creator */}
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">Create a New Note</h2>
+          <NoteForm />
         </div>
-    </div>
-  )
-}
 
-export default Home
+        {/* Notes List */}
+        <div>
+          <NoteList />
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-12 text-sm text-gray-500 text-center">
+        © 2025 QuickNotes. Built with 💻 by Madhesh.
+      </footer>
+    </div>
+  );
+};
+
+export default Home;
