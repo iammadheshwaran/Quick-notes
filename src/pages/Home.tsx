@@ -28,7 +28,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="mt-12 text-sm text-gray-500 text-center">
-        © 2025 QuickNotes. Built with 💻 by Madhesh.
+        © 2025 QuickNotes. Made with 💻 by Marsg.
       </footer>
     </div>
   );
