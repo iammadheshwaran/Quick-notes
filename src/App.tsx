@@ -11,8 +11,8 @@ const App = () => {
 
 
         {/* Footer */}
-        <footer className="text-center font-poppins text-sm text-gray-500 mt-8 pb-3">
-          © 2025 QuickNotes. Made with 💻 by {' '}
+        <footer className="text-center font-poppins text-sm text-gray-500 mt-8 pb-4">
+          Made with 💻 by {' '}
           <a
             href="https://github.com/iammadheshwaran"
             target="_blank"
