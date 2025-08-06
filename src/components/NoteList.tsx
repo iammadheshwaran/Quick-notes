@@ -58,28 +58,34 @@ const NoteList = () => {
         >
           {notes.map((note, index) => {
             const isExpanded = expandedNoteId === note.id;
-            const isLastOdd =
-              notes.length % 2 === 1 && index === notes.length - 1;
+            const isLastOdd = notes.length % 2 === 1 && index === notes.length - 1;
 
             return (
               <div
-  key={note.id}
-  className={`relative group transition-all duration-300 ease-in-out p-4 border rounded-lg shadow-sm bg-white hover:shadow-lg 
-              ${isLastOdd ? "md:col-span-2 md:justify-self-center md:w-1/2" : ""}
-              `}
->
-  <p className="text-gray-700 max-h-[3.5rem] overflow-hidden group-hover:max-h-[500px] transition-all duration-300 ease-in-out whitespace-pre-wrap break-words">
-    {note.content}
-  </p>
+                key={note.id}
+                className={`relative group transition-all duration-300 ease-in-out p-4 border rounded-lg shadow-sm bg-white hover:shadow-lg 
+                  ${isLastOdd ? "md:col-span-2 md:justify-self-center md:w-1/2" : ""}
+                `}
+              >
+                <p
+                  onClick={() => toggleExpand(note.id)}
+                  className={`text-gray-700 whitespace-pre-wrap break-words cursor-pointer transition-all duration-300 ease-in-out ${
+                    isExpanded
+                      ? "max-h-[500px]"
+                      : "max-h-[3.5rem] overflow-hidden"
+                  }`}
+                  title="Click to expand/collapse"
+                >
+                  {note.content}
+                </p>
 
-  <Button
-    onClick={() => handleDelete(note.id)}
-    className="bg-red-600 hover:bg-red-700 mt-2"
-  >
-    Delete
-  </Button>
-</div>
-
+                <Button
+                  onClick={() => handleDelete(note.id)}
+                  className="bg-red-600 hover:bg-red-700 mt-2"
+                >
+                  Delete
+                </Button>
+              </div>
             );
           })}
         </div>
