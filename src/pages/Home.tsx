@@ -3,7 +3,7 @@ import NoteList from "@/components/NoteList";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-100 to-purple-100 flex flex-col items-center font-poppins px-4 py-10">
+    <div className="min-h-screen flex flex-col items-center font-poppins px-4 py-10">
       {/* Header */}
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-extrabold text-gray-800 mb-2 flex items-center justify-center gap-2">
@@ -25,11 +25,7 @@ const Home = () => {
           <NoteList />
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="mt-12 text-sm text-gray-500 text-center">
-        © 2025 QuickNotes. Made with 💻 by Marsg.
-      </footer>
+      
     </div>
   );
 };

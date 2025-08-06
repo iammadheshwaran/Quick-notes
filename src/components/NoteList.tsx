@@ -1,77 +1,91 @@
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firsbase";
 import {
-    collection,
-    onSnapshot,
-    deleteDoc,
-    doc,
-    orderBy,
-    query,
+  collection,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  orderBy,
+  query,
 } from "firebase/firestore";
 import { Button } from "./ui/button";
 import toast from "react-hot-toast";
 
 type Note = {
-    id: string;
-    content: string;
+  id: string;
+  content: string;
 };
 
 const NoteList = () => {
-    const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
 
-    useEffect(() => {
-        const q = query(collection(db, "notes"), orderBy("createdAt", "desc"));
+  useEffect(() => {
+    const q = query(collection(db, "notes"), orderBy("createdAt", "desc"));
 
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const notesData: Note[] = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                content: doc.data().content,
-            }));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const notesData: Note[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        content: doc.data().content,
+      }));
 
-            setNotes(notesData);
-        });
+      setNotes(notesData);
+    });
 
-        return () => unsubscribe();
-    }, []);
+    return () => unsubscribe();
+  }, []);
 
-    const handleDelete = async (id: string) => {
-        await deleteDoc(doc(db, "notes", id));
-        toast.success("Note deleted");
-    };
+  const handleDelete = async (id: string) => {
+    await deleteDoc(doc(db, "notes", id));
+    toast.success("Note deleted");
+  };
 
-    return (
-        <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-4xl mx-auto min-h-[150px] mt-6">
-            <h2 className="text-2xl font-bold mb-4">Your Notes</h2>
+  const toggleExpand = (id: string) => {
+    setExpandedNoteId((prevId) => (prevId === id ? null : id));
+  };
 
-            {notes.length === 0 ? (
-                <p className="text-gray-400 text-center">No notes yet. Start typing...</p>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto pr-1">
-                    {notes.map((note, index) => {
-                        const isLastOdd =
-                            notes.length % 2 === 1 && index === notes.length - 1;
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-4xl mx-auto min-h-[150px] mt-6">
+      <h2 className="text-2xl font-bold mb-4">Your Notes</h2>
 
-                        return (
-                            <div
-                                key={note.id}
-                                className={`flex items-center justify-between p-4 border rounded-lg shadow-sm ${isLastOdd ? "md:col-span-2 md:justify-self-center md:w-1/2" : ""
-                                    }`}
+      {notes.length === 0 ? (
+        <p className="text-gray-400 text-center">No notes yet. Start typing...</p>
+      ) : (
+        <div
+          className={`grid gap-4 ${
+            notes.length === 1 ? "grid-cols-1" : "sm:grid-cols-2 grid-cols-1"
+          }`}
+        >
+          {notes.map((note, index) => {
+            const isExpanded = expandedNoteId === note.id;
+            const isLastOdd =
+              notes.length % 2 === 1 && index === notes.length - 1;
 
-                            >
-                                <p className="text-gray-700">{note.content}</p>
-                                <Button
-                                    onClick={() => handleDelete(note.id)}
-                                    className="bg-red-600 hover:bg-red-700 ml-4"
-                                >
-                                    Delete
-                                </Button>
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
+            return (
+              <div
+  key={note.id}
+  className={`relative group transition-all duration-300 ease-in-out p-4 border rounded-lg shadow-sm bg-white hover:shadow-lg 
+              ${isLastOdd ? "md:col-span-2 md:justify-self-center md:w-1/2" : ""}
+              `}
+>
+  <p className="text-gray-700 max-h-[3.5rem] overflow-hidden group-hover:max-h-[500px] transition-all duration-300 ease-in-out whitespace-pre-wrap break-words">
+    {note.content}
+  </p>
+
+  <Button
+    onClick={() => handleDelete(note.id)}
+    className="bg-red-600 hover:bg-red-700 mt-2"
+  >
+    Delete
+  </Button>
+</div>
+
+            );
+          })}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default NoteList;
