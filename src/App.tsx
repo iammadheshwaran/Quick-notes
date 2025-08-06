@@ -14,7 +14,7 @@ const App = () => {
         <footer className="text-center font-poppins text-sm text-gray-500 mt-8 pb-4">
           Made with 💻 by {' '}
           <a
-            href=" "
+            href="https://github.com/iammadheshwaran"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium hover:text-blue-600"
