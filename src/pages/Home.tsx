@@ -9,7 +9,7 @@ const Home = () => {
         <h1 className="text-4xl font-extrabold text-gray-800 mb-2 flex items-center justify-center gap-2">
           QuickNotes <span>📝</span>
         </h1>
-        <p className="text-gray-600 text-lg">Fast, minimal note-taking — built for speed.</p>
+        <p className="text-gray-600 text-sm">Fast, minimal note-taking — built for speed.</p>
       </div>
 
       {/* Unified Card Container */}
