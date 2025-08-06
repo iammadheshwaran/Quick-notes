@@ -38,6 +38,8 @@ A simple and lightweight React + TypeScript app to quickly add, view, expand, an
 
 ## Folder Structure
 
+```txt
+
 src/
 ├── components/
 │   ├── NoteList.tsx
@@ -48,5 +50,4 @@ src/
 ├── App.tsx
 └── main.tsx
 
-## Folder Structure
 
